@@ -1,12 +1,12 @@
 // Builds the bilingual static site from content/*.json.
-// Usage: node build.mjs   ->  writes index.html (English) and el/index.html (Greek)
+// Usage: node build.mjs   ->  writes index.html (English) and el.html (Greek)
 // No dependencies: plain Node 18+.
 
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 
 // ---- Site settings: edit these -------------------------------------------
 const site = {
-  url: "https://example.com",            // TODO: your domain once you buy it
+  url: "https://vasileios-dev.vercel.app", // change when you buy your own domain
   email: "vdimitropoulos01@gmail.com",
   phone: "+30 698 017 8200",
   phoneHref: "+306980178200",
@@ -81,14 +81,14 @@ function page(t, { prefix, selfPath, otherPath }) {
 <meta name="description" content="${esc(t.description)}">
 <meta property="og:title" content="${esc(t.title)}">
 <meta property="og:description" content="${esc(t.description)}">
-<meta property="og:image" content="${site.url}/assets/img/vasileios.jpg">
+<meta property="og:image" content="${site.url}/vasileios.jpg">
 <link rel="canonical" href="${site.url}/${selfPath}">
 <link rel="alternate" hreflang="en" href="${site.url}/">
-<link rel="alternate" hreflang="el" href="${site.url}/el/">
+<link rel="alternate" hreflang="el" href="${site.url}/el.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..700&family=Syne:wght@600..800&display=swap">
-<link rel="stylesheet" href="${prefix}assets/css/style.css">`;
+<link rel="stylesheet" href="style.css">`;
 
   const body = `
 <a class="skip" href="#main">${t.lang === "el" ? "Μετάβαση στο περιεχόμενο" : "Skip to content"}</a>
@@ -125,7 +125,7 @@ function page(t, { prefix, selfPath, otherPath }) {
         <p class="hero__badge"><span class="dot" aria-hidden="true"></span>${esc(t.hero.badge)}</p>
       </div>
       <figure class="hero__photo">
-        <img src="${prefix}assets/img/vasileios.jpg" alt="${esc(t.hero.photoAlt)}" width="800" height="1055">
+        <img src="vasileios.jpg" alt="${esc(t.hero.photoAlt)}" width="800" height="1055">
       </figure>
     </div>
   </section>
@@ -203,7 +203,7 @@ function page(t, { prefix, selfPath, otherPath }) {
     <a href="#top">${esc(t.footer.top)} ↑</a>
   </div>
 </footer>
-<script src="${prefix}assets/js/main.js" defer></script>`;
+<script src="main.js" defer></script>`;
 
   return { head, body };
 }
@@ -219,18 +219,17 @@ const full = (lang, { head, body }) => `<!doctype html>
 </html>
 `;
 
-const en = JSON.parse(readFileSync("content/en.json", "utf8"));
-const el = JSON.parse(readFileSync("content/el.json", "utf8"));
+const en = JSON.parse(readFileSync("content-en.json", "utf8"));
+const el = JSON.parse(readFileSync("content-el.json", "utf8"));
 
-writeFileSync("index.html", full("en", page(en, { prefix: "", selfPath: "", otherPath: "el/index.html" })));
-mkdirSync("el", { recursive: true });
-writeFileSync("el/index.html", full("el", page(el, { prefix: "../", selfPath: "el/", otherPath: "../index.html" })));
+writeFileSync("index.html", full("en", page(en, { prefix: "", selfPath: "", otherPath: "el.html" })));
+writeFileSync("el.html", full("el", page(el, { prefix: "", selfPath: "el.html", otherPath: "index.html" })));
 
 // Optional: a body-only copy used for the claude.ai preview.
 if (process.argv.includes("--preview")) {
   mkdirSync("preview", { recursive: true });
-  const p = page(en, { prefix: "", selfPath: "", otherPath: "el/index.html" });
+  const p = page(en, { prefix: "", selfPath: "", otherPath: "el.html" });
   writeFileSync("preview/index.html", p.head + "\n" + p.body + "\n");
 }
 
-console.log("Built index.html and el/index.html");
+console.log("Built index.html and el.html");

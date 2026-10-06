@@ -1,0 +1,82 @@
+{
+  "lang": "en",
+  "otherLang": "el",
+  "otherLangLabel": "ΕΛ",
+  "otherLangName": "Ελληνικά",
+  "title": "Vasileios Dimitropoulos · Web Designer & Developer",
+  "description": "Web designer and developer in Patras, Greece. Fast, clean websites and AI assistants for small businesses.",
+  "nav": { "services": "Services", "work": "Work", "process": "Process", "about": "About", "contact": "Contact", "cta": "Book a call" },
+  "hero": {
+    "eyebrow": "Web designer & developer · Patras, Greece",
+    "name": "Vasileios Dimitropoulos",
+    "tagline": "I design and build websites that look sharp, load fast and bring in customers.",
+    "primary": "Book a free 20-minute call",
+    "secondary": "See my work",
+    "photoAlt": "Portrait of Vasileios Dimitropoulos",
+    "badge": "Available for new projects"
+  },
+  "services": {
+    "eyebrow": "Services",
+    "title": "What you can hire me for",
+    "items": [
+      { "name": "New website", "text": "Design, build and launch. Ready for phones and for Google from day one." },
+      { "name": "Redesign", "text": "A fresh look and faster pages for a site that feels outdated." },
+      { "name": "WordPress care", "text": "Updates, backups, fixes and small changes, so you don't have to think about it." },
+      { "name": "AI assistants", "text": "Chat assistants that answer your customers in Greek and English, day and night." }
+    ]
+  },
+  "work": {
+    "eyebrow": "Work",
+    "title": "Selected projects",
+    "note": "Concept projects are designed for fictional businesses to show what I can build.",
+    "items": [
+      { "tag": "This site", "status": "Live", "name": "Personal portfolio", "text": "Bilingual static site, hand-coded with no framework. Fast, accessible and free to host.", "stack": "HTML · CSS · JavaScript" },
+      { "tag": "In progress", "status": "Building", "name": "AI guest assistant for a hotel in Paros", "text": "Answers guests in Greek and English, logs requests for staff and hands tricky questions to a person.", "stack": "AI · WhatsApp · Hotel knowledge base" },
+      { "tag": "Concept", "status": "Coming soon", "name": "Café website", "text": "Menu, opening hours, location and online pre-orders for a neighbourhood café.", "stack": "Static site" },
+      { "tag": "Concept", "status": "Coming soon", "name": "Boutique hotel website", "text": "Rooms, gallery and a direct booking request form for a small island hotel.", "stack": "WordPress" }
+    ]
+  },
+  "process": {
+    "eyebrow": "How I work",
+    "title": "Four steps, no surprises",
+    "steps": [
+      { "name": "Talk", "text": "We agree on goals, budget and timeline in a short call." },
+      { "name": "Design", "text": "You see and approve the look before any code is written." },
+      { "name": "Build", "text": "I develop and test, and share progress as I go." },
+      { "name": "Launch", "text": "We go live together, and I stay around for support." }
+    ]
+  },
+  "about": {
+    "eyebrow": "About",
+    "title": "You talk to the person who builds it",
+    "paragraphs": [
+      "I'm Vasileios, a web designer and developer based in Patras. I build websites for small businesses that want to look professional online without paying agency prices.",
+      "No account managers and no handoffs. You get quick replies, honest advice, and a site that's yours to keep. I also build AI assistants that take the repetitive questions off your plate."
+    ],
+    "facts": [
+      { "label": "Based in", "value": "Patras, Greece" },
+      { "label": "Languages", "value": "Greek, English" },
+      { "label": "Focus", "value": "Small businesses & hospitality" }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Got a project in mind?",
+    "text": "Tell me a little about it and I'll reply within one working day. Or book a free 20-minute call.",
+    "book": "Book a free 20-minute call",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone",
+    "form": {
+      "name": "Your name",
+      "email": "Email",
+      "message": "What do you need?",
+      "messagePlaceholder": "A new website for my café, about 5 pages…",
+      "send": "Send message",
+      "notConnected": "The form isn't connected yet. Please email me directly for now.",
+      "sending": "Sending…",
+      "sent": "Thanks! Your message is on its way. I'll reply within one working day.",
+      "error": "Something went wrong. Please email me directly."
+    }
+  },
+  "footer": { "rights": "Vasileios_dev", "top": "Back to top" }
+}
