@@ -10,6 +10,8 @@
 | main.js | Η φόρμα επικοινωνίας |
 | vasileios.jpg | Η φωτογραφία |
 | content-en.json / content-el.json | Τα κείμενα |
+| favicon.svg | Το εικονίδιο στην καρτέλα του browser |
+| robots.txt / sitemap.xml | Για το Google (φτιάχνονται από το build) |
 | build.mjs | Ξαναφτιάχνει τις σελίδες από τα κείμενα (`node build.mjs`) |
 
 Ρυθμίσεις (email, τηλέφωνο, link ραντεβού, φόρμα): στην αρχή του `build.mjs`.

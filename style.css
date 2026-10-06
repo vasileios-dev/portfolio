@@ -15,7 +15,7 @@
   --glow: #EE7A45;
   --ok: #2F7D5B;
 
-  --font-display: "Syne", "Arial Black", Arial, sans-serif;
+  --font-display: "Syne", "Segoe UI", Arial, sans-serif;
   --font-text: "DM Sans", "Segoe UI", Arial, sans-serif;
 
   --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
@@ -103,7 +103,7 @@ a { color: inherit; }
 }
 .hero__inner { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(32px, 6vw, 80px); align-items: center; }
 .hero__text { min-width: 0; display: flex; flex-direction: column; gap: 22px; }
-.hero h1 { font-size: var(--step-3); font-weight: 800; }
+.hero h1 { font-size: clamp(1.7rem, 0.9rem + 3.4vw, 3.5rem); font-weight: 800; line-height: 1.1; overflow-wrap: break-word; }
 .hero__tagline { font-size: var(--step-1); color: var(--night-muted); max-width: 32ch; line-height: 1.45; }
 .hero__ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px; }
 .hero__badge { display: inline-flex; align-items: center; gap: 10px; font-size: 0.92rem; color: var(--night-muted); }

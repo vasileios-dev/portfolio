@@ -6,13 +6,14 @@ import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 
 // ---- Site settings: edit these -------------------------------------------
 const site = {
-  url: "https://vasileios-dev.vercel.app", // change when you buy your own domain
+  url: "https://vdimitropoulos.vercel.app", // change when you buy your own domain
   email: "vdimitropoulos01@gmail.com",
   phone: "+30 698 017 8200",
   phoneHref: "+306980178200",
   github: "https://github.com/vasileios-dev",
   bookingUrl: "#contact",                 // TODO: your Cal.com or Calendly link
   formAction: "https://formspree.io/f/YOUR_FORM_ID", // TODO: your Formspree form id
+  googleVerification: "",                // paste the code from Google Search Console here
 };
 // ---------------------------------------------------------------------------
 
@@ -79,12 +80,57 @@ function page(t, { prefix, selfPath, otherPath }) {
   const head = `
 <title>${esc(t.title)}</title>
 <meta name="description" content="${esc(t.description)}">
+<meta name="robots" content="index, follow">
+<meta name="author" content="${esc(t.hero.name)}">
+<meta name="theme-color" content="#13202A">${site.googleVerification ? `
+<meta name="google-site-verification" content="${site.googleVerification}">` : ""}
+<meta property="og:type" content="website">
+<meta property="og:url" content="${site.url}/${selfPath}">
+<meta property="og:site_name" content="${esc(t.hero.name)}">
+<meta property="og:locale" content="${t.lang === "el" ? "el_GR" : "en_US"}">
 <meta property="og:title" content="${esc(t.title)}">
 <meta property="og:description" content="${esc(t.description)}">
 <meta property="og:image" content="${site.url}/vasileios.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="vasileios.jpg">
 <link rel="canonical" href="${site.url}/${selfPath}">
 <link rel="alternate" hreflang="en" href="${site.url}/">
 <link rel="alternate" hreflang="el" href="${site.url}/el.html">
+<link rel="alternate" hreflang="x-default" href="${site.url}/">
+<script type="application/ld+json">${JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${site.url}/#person`,
+      name: t.lang === "el" ? "Βασίλειος Δημητρόπουλος" : "Vasileios Dimitropoulos",
+      alternateName: t.lang === "el" ? "Vasileios Dimitropoulos" : "Βασίλειος Δημητρόπουλος",
+      jobTitle: "Web Designer & Developer",
+      url: site.url + "/",
+      image: `${site.url}/vasileios.jpg`,
+      email: `mailto:${site.email}`,
+      telephone: site.phoneHref,
+      address: { "@type": "PostalAddress", addressLocality: t.lang === "el" ? "Πάτρα" : "Patras", addressCountry: "GR" },
+      sameAs: [site.github],
+      knowsLanguage: ["el", "en"],
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${site.url}/#service`,
+      name: `${t.lang === "el" ? "Βασίλειος Δημητρόπουλος" : "Vasileios Dimitropoulos"} · Web Design`,
+      description: t.description,
+      url: `${site.url}/${selfPath}`,
+      image: `${site.url}/vasileios.jpg`,
+      email: site.email,
+      telephone: site.phoneHref,
+      founder: { "@id": `${site.url}/#person` },
+      address: { "@type": "PostalAddress", addressLocality: t.lang === "el" ? "Πάτρα" : "Patras", addressCountry: "GR" },
+      areaServed: "GR",
+      inLanguage: t.lang,
+    },
+  ],
+}).replace(/</g, "\\u003c")}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..700&family=Syne:wght@600..800&display=swap">
@@ -232,4 +278,26 @@ if (process.argv.includes("--preview")) {
   writeFileSync("preview/index.html", p.head + "\n" + p.body + "\n");
 }
 
-console.log("Built index.html and el.html");
+const today = new Date().toISOString().slice(0, 10);
+const alt = `
+    <xhtml:link rel="alternate" hreflang="en" href="${site.url}/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="${site.url}/el.html"/>`;
+writeFileSync("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>${site.url}/</loc>
+    <lastmod>${today}</lastmod>${alt}
+  </url>
+  <url>
+    <loc>${site.url}/el.html</loc>
+    <lastmod>${today}</lastmod>${alt}
+  </url>
+</urlset>
+`);
+writeFileSync("robots.txt", `User-agent: *
+Allow: /
+
+Sitemap: ${site.url}/sitemap.xml
+`);
+
+console.log("Built index.html, el.html, sitemap.xml and robots.txt");

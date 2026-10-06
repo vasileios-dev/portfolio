@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vdimitropoulos.vercel.app/sitemap.xml
